@@ -1,0 +1,12 @@
+Home page starts out with no articles, button must be built in to kick off scraping of website
+
+Home page also has links to "home" and "saved articles" at top for user, home shows articles that can be scraped, saved are those that have been marked saved (boolean)
+
+Button must be added to websites that are saved, this button allows a user to comment on the article / leave notes
+    Individual notes should be able to be viewed and also deleted
+
+Button must be added to website that are saved to delete or remove from saved (boolean will be changed to false)
+
+Headline, summary of article and URL should be added at a minimum for user to be able to see, these will need to be scraped
+
+Additionally, once functional on a local machine, this must be made to be deployed to heroku, additional paramters will need to be defined and installed
