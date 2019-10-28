@@ -18,8 +18,12 @@ db.on("error", function (error) {
     console.log("Database Error:", error);
 });
 
+app.get("/", function (req, res) {
+    res.send("Hello world");
+  });  
+
 app.get("/api/all", function (req, res) {
-    db.scrapedData.find({}, function (err, data) {
+    db.WashingtonPost.find({}, function (err, data) {
         if (err) return res.status(500).end();
         res.json(data)
     })
@@ -34,7 +38,7 @@ app.get("/scraped", function (req, res) {
                 var title = $(element).children().text();
                 var link = $(element).find("a").attr("href");
 
-                db.scrapedData.insert({
+                db.WashingtonPost.insert({
                     "title": title,
                     "link": link
                 })
