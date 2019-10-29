@@ -5,6 +5,10 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 var app = express();
 
+var PORT = process.env.PORT || 3000;
+var routes = require("./controllers/mainController.js");
+
+app.use(routes);
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -45,8 +49,8 @@ app.get("/scraped", function (req, res) {
             });
             res.send("Scrape Initiated")
         })
-})
+});
 
-app.listen(3000, function () {
-    console.log("App running on port 3000!");
+app.listen(PORT, function () {
+    console.log("Server listening on: http://localhost:" + PORT);
 });
