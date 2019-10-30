@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var cheerio = require("cheerio");
 var db = require("../models");
+var axios = require("axios");
 
 module.exports = function (app) {
     app.get("/api/all", function (req, res) {
@@ -83,11 +84,11 @@ module.exports = function (app) {
         })
     });
     
-    app.get("/display-saved/", function(req, res) {
+    app.get("/saved", function(req, res) {
         db.Article.find( 
             { saved: true }
         ).then(function(data) {
-            res.json(data);
+            res.render("index", data)
         });
     });
 }

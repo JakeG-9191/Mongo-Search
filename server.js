@@ -3,7 +3,7 @@ var logger = require("morgan");
 var axios = require("axios");
 var cheerio = require("cheerio");
 var mongoose = require("mongoose");
-// var exphbs = require("express-handlebars");
+var exphbs = require("express-handlebars");
 
 var db = require("./models");
 var app = express();
@@ -20,8 +20,8 @@ app.use(express.static("public"));
 require("./routes/apiRoutes")(app);
 require("./routes/html")(app);
 
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 mongoose.connect("mongodb://localhost/WashingtonPost", { useNewUrlParser: true });
 
