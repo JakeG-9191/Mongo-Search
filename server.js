@@ -3,16 +3,21 @@ var logger = require("morgan");
 var axios = require("axios");
 var cheerio = require("cheerio");
 var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
+
 var app = express();
 
 var PORT = process.env.PORT || 3000;
 // var routes = require("./controllers/mainController.js");
 
-app.use(routes);
+// app.use(routes);
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 var db = require("./models");
 
@@ -47,8 +52,8 @@ app.get("/scrape", function (req, res) {
                 // var title = $(element).children().text();
                 // var link = $(element).find("a").attr("href");
 
-                db.Article.create(data)
-                    .then(function (dbArticle) {
+                db.Article.create(newScrape)
+                    .then(function(dbArticle) {
                         console.log(dbArticle)
                     })
                     .catch(function (err) {
