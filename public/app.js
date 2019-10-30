@@ -14,19 +14,22 @@ $(document).on("click", ".scraped-art", function(){
     })
     .then(function(data){
         console.log(data);
-        $("#user-comment").append("<h3>" + data.title + "</h3>");
+        $("#user-comment").append("<h2>" + data.title + "</h2>");
         $("#user-comment").append("<input id='titleinput' name='title'>");
         $("#user-comment").append("<textarea id='bodyinput' name='body'></textarea>");
         $("#user-comment").append("<button data-id='" + data._id + "'id='savecomment'>Save Your Comment</button>");
+        $("#user-comment").append("<h2> Your Saved Comment <h2>")
+        $("#user-comment").append("<input id='title2'></input>");
+        $("#user-comment").append("<input id='comment2'></input>");
 
         if(data.comment){
-            $("#titleinput").val(data.comment.title);
-            $("#comment-body").val(data.comment.body)
+            $("#title2").val(data.comment.title);
+            $("#comment2").val(data.comment.body)
         }
     });
 });
 
-$("#savecomment").on("click", function(){
+$(document).on("click", "#savecomment", function(){
     var thisId = $(this).attr("data-id");
     $.ajax({
         method: "POST",
