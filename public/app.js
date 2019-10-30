@@ -4,7 +4,7 @@ $.getJSON("/articles", function(data){
     }
 });
 
-$(".comment").on("click", function(){
+$(document).on("click", ".comment", function(){
     $("#user-comment").empty();
     var thisId = $(this).attr("data-id");
 
@@ -17,7 +17,7 @@ $(".comment").on("click", function(){
         $("#user-comment").append("<h3>" + data.title + "</h3>");
         $("#user-comment").append("<input id='titleinput' name='title'>");
         $("#user-comment").append("<textarea id='bodyinput' name='body'></textarea>");
-        $("#user-comment").append("<button data-id='" + data._id + "'id='savecomment>Save Your Comment</button>");
+        $("#user-comment").append("<button data-id='" + data._id + "'id='savecomment'>Save Your Comment</button>");
 
         if(data.note){
             $("#comment-title").val(data.comment.title);
@@ -42,5 +42,5 @@ $("#savecomment").on("click", function(){
     });
 
     $("#titleinput").val("");
-    $("#bodyinput").val();
+    $("#bodyinput").val("");
 });
