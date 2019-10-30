@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 var app = express();
 
 var PORT = process.env.PORT || 3000;
-var routes = require("./controllers/mainController.js");
+// var routes = require("./controllers/mainController.js");
 
 app.use(routes);
 app.use(logger("dev"));
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 var db = require("./models");
+
 mongoose.connect("mongodb://localhost/WashingtonPost", { useNewUrlParser: true });
 
 app.get("/", function (req, res) {
