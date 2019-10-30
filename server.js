@@ -5,6 +5,7 @@ var cheerio = require("cheerio");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 
+var db = require("./models");
 var app = express();
 
 var PORT = process.env.PORT || 3000;
@@ -16,16 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-
-var db = require("./models");
+// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+// app.set("view engine", "handlebars");
 
 mongoose.connect("mongodb://localhost/WashingtonPost", { useNewUrlParser: true });
 
-app.get("/", function (req, res) {
-    res.send("Hello world");
-});
+// app.get("/", function (req, res) {
+//     res.send("Hello world");
+// });
 
 app.get("/api/all", function (req, res) {
     db.WashingtonPost.find({}, function (err, data) {
@@ -49,9 +48,6 @@ app.get("/scrape", function (req, res) {
                     .children("a")
                     .attr("href");
 
-                // var title = $(element).children().text();
-                // var link = $(element).find("a").attr("href");
-
                 db.Article.create(newScrape)
                     .then(function(dbArticle) {
                         console.log(dbArticle)
@@ -66,8 +62,8 @@ app.get("/scrape", function (req, res) {
 
 app.get("/articles", function (req, res) {
     db.Article.find({})
-        .then(function (data) {
-            res.json(data);
+        .then(function (dbArticle) {
+            res.json(dbArticle);
         })
         .catch(function (err) {
             res.json(err)
@@ -77,8 +73,8 @@ app.get("/articles", function (req, res) {
 app.get("/articles/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id })
         .populate("comment")
-        .then(function (data) {
-            res.json(data)
+        .then(function (dbArticle) {
+            res.json(dbArticle)
         })
         .catch(function (err) {
             res.json(err)
@@ -87,11 +83,11 @@ app.get("/articles/:id", function (req, res) {
 
 app.post("/articles/:id", function (req, res) {
     db.Comment.create(req.body)
-        .then(function (data) {
-            return db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { comment: data._id } }, { new: true })
+        .then(function (dbComment) {
+            return db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { comment: dbComment._id }}, { new: true })
         })
-        .then(function (data) {
-            res.json(data)
+        .then(function (dbArticle) {
+            res.json(dbArticle)
         })
         .catch(function (err) {
             res.json(err)

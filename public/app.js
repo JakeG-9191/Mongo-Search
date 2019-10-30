@@ -1,10 +1,10 @@
 $.getJSON("/articles", function(data){
     for (var i = 0; i < data.length; i++) {
-        $("#articles").append("<p class='comment' data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+        $("#articles").append("<p class='scraped-art' data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
     }
 });
 
-$(document).on("click", ".comment", function(){
+$(document).on("click", ".scraped-art", function(){
     $("#user-comment").empty();
     var thisId = $(this).attr("data-id");
 
@@ -19,8 +19,8 @@ $(document).on("click", ".comment", function(){
         $("#user-comment").append("<textarea id='bodyinput' name='body'></textarea>");
         $("#user-comment").append("<button data-id='" + data._id + "'id='savecomment'>Save Your Comment</button>");
 
-        if(data.note){
-            $("#comment-title").val(data.comment.title);
+        if(data.comment){
+            $("#titleinput").val(data.comment.title);
             $("#comment-body").val(data.comment.body)
         }
     });
