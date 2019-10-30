@@ -14,15 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// var databaseUrl = "webScrape";
-// var collections = ["WashingtonPost"];
-
 var db = require("./models");
 mongoose.connect("mongodb://localhost/WashingtonPost", { useNewUrlParser: true });
 
 app.get("/", function (req, res) {
     res.send("Hello world");
-  });  
+});
 
 app.get("/api/all", function (req, res) {
     db.WashingtonPost.find({}, function (err, data) {
@@ -39,26 +36,21 @@ app.get("/scrape", function (req, res) {
             $("div.headline").each(function (i, element) {
                 var newScrape = {};
 
-                result.title = $(this)
-                .children("a")
-                .text();
-              result.link = $(this)
-                .children("a")
-                .attr("href");
+                newScrape.title = $(this)
+                    .children("a")
+                    .text();
+                newScrape.link = $(this)
+                    .children("a")
+                    .attr("href");
 
                 // var title = $(element).children().text();
                 // var link = $(element).find("a").attr("href");
 
-                // db.WashingtonPost.insert({
-                //     "title": title,
-                //     "link": link
-                // })
-
                 db.Article.create(data)
-                    .then(function(dbArticle){
+                    .then(function (dbArticle) {
                         console.log(dbArticle)
                     })
-                    .catch(function(err){
+                    .catch(function (err) {
                         console.log(err)
                     })
             });
@@ -66,16 +58,40 @@ app.get("/scrape", function (req, res) {
         })
 });
 
-app.get("/articles", function(req, res){
+app.get("/articles", function (req, res) {
     db.Article.find({})
-        .then(function(data){
+        .then(function (data) {
             res.json(data);
         })
-        .catch(function(err){
+        .catch(function (err) {
+            res.json(err)
+        })
+});
+
+app.get("/articles/:id", function (req, res) {
+    db.Article.findOne({ _id: req.params.id })
+        .populate("comment")
+        .then(function (data) {
+            res.json(data)
+        })
+        .catch(function (err) {
+            res.json(err)
+        })
+});
+
+app.post("/articles/:id", function (req, res) {
+    db.Comment.create(req.body)
+        .then(function (data) {
+            return db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { comment: data._id } }, { new: true })
+        })
+        .then(function (data) {
+            res.json(data)
+        })
+        .catch(function (err) {
             res.json(err)
         })
 })
 
 app.listen(PORT, function () {
-    console.log("Server listening on: http://localhost:" + PORT);
+    console.log("App running on port " + PORT + "!");
 });
