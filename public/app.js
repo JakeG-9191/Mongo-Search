@@ -50,18 +50,21 @@ $(document).on("click", "#savecomment", function(){
 });
 
 $(document).on("click", "#deletecomment", function(){
+    $("#title2").val("");
+    $("#comment2").val("");
     var thisId = $(this).attr("data-id");
+
     $.ajax({
         method: "POST",
         url: "/articles/" + thisId,
         data: {
-            title: $("#title2").val().empty(),
-            body: $("#comment2").val().empty()
+            title: (""),
+            body: ("")
         }
     })
     .then(function(data){
         console.log(data)
-        $("user-comment").empty();
-        $("#title2").empty();
+        // $("user-comment").empty();
     });
+
 });
