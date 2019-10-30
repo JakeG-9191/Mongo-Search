@@ -17,14 +17,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 mongoose.connect("mongodb://localhost/WashingtonPost", { useNewUrlParser: true });
 
-// app.get("/", function (req, res) {
-//     res.send("Hello world");
-// });
 
 app.get("/api/all", function (req, res) {
     db.WashingtonPost.find({}, function (err, data) {
@@ -56,7 +53,8 @@ app.get("/scrape", function (req, res) {
                         console.log(err)
                     })
             });
-            res.send("Scrape Has Completed!")
+            // res.send("Scrape Has Completed!");
+            res.render("index", "Scrape Has Completed!")
         })
 });
 
