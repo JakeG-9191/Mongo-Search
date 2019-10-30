@@ -37,17 +37,3 @@ textarea {
   height: 200px;
   font-size: 18px;
 }
-
-#comment-title {
-  height: 200px;
-  font-size: 18px;
-  background-color: blue;
-  color: white
-}
-
-#comment-body {
-  height: 200px;
-  font-size: 18px;
-  background-color: blue;
-  color: white
-}

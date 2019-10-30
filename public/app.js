@@ -21,6 +21,7 @@ $(document).on("click", ".scraped-art", function(){
         $("#user-comment").append("<h2> Your Saved Comment <h2>")
         $("#user-comment").append("<input id='title2'></input>");
         $("#user-comment").append("<input id='comment2'></input>");
+        $("#user-comment").append("<button data-id='" + data._id + "'id='deletecomment'>Delete Your Comment</button>")
 
         if(data.comment){
             $("#title2").val(data.comment.title);
@@ -46,4 +47,21 @@ $(document).on("click", "#savecomment", function(){
 
     $("#titleinput").val("");
     $("#bodyinput").val("");
+});
+
+$(document).on("click", "#deletecomment", function(){
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + thisId,
+        data: {
+            title: $("#title2").val().empty(),
+            body: $("#comment2").val().empty()
+        }
+    })
+    .then(function(data){
+        console.log(data)
+        $("user-comment").empty();
+        $("#title2").empty();
+    });
 });
