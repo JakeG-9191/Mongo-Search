@@ -37,6 +37,19 @@ $(document).on("click", ".scraped-art", function () {
         });
 });
 
+$(document).on("click", ".scraped-art", function () {
+    $("#user-saved").empty();
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+            method: "GET",
+            url: "/articles/" + thisId
+        })
+        .then(function (data) {
+            console.log(data);
+            $("#user-saved").append("<button data-id='" + data._id + "'id='delete-art'>Delete This Article From Saved</button>");
+        });
+});
+
 function saveComment() {
     $(document).on("click", "#savecomment", function () {
         var thisId = $(this).attr("data-id");
@@ -83,6 +96,16 @@ $(document).on("click", "#save-art", function(){
     $.ajax({
         type: "PUT",
         url: "/articles-saved/" + thisId,
+    }).then(function(data) {
+        console.log(data);
+    });
+});
+
+$(document).on("click", "#delete-art", function(){
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        type: "PUT",
+        url: "/articles-deleted/" + thisId,
     }).then(function(data) {
         console.log(data);
     });

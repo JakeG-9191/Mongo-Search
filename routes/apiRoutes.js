@@ -93,5 +93,15 @@ module.exports = function (app) {
             res.json(err)
         })
     });
+
+    app.put("/articles-deleted/:id", function(req, res) {
+        db.Article.findByIdAndUpdate(req.params.id, { $set: { saved: false }
+        }).then(function(data) {
+            res.json(data);
+        })
+        .catch(function(err){
+            res.json(err)
+        })
+    });
     
 }
