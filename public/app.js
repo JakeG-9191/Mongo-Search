@@ -121,10 +121,5 @@ $(document).on("click", "#delete-art", function(){
     location.reload();
 });
 
-// $(document).on("click", "#visit-art", function(){
-//     var thisLink = $(this).attr("link");
-//     href = thisLink
-// });
-
 saveComment();
 deleteComment();
