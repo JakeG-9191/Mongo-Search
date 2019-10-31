@@ -35,7 +35,7 @@ module.exports = function (app) {
                             console.log(err)
                         })
                 });
-                res.send("Scrape Has Completed!");
+                res.send(`Scrape Has Completed!<br>            <button type="button" class="btn btn-dark btn-lg"><a href="/">Back To Home</a></button>`);
             })
     });
     
