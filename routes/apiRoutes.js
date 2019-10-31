@@ -12,7 +12,7 @@ module.exports = function (app) {
     })
 
     app.get("/scrape", function (req, res) {
-        axios.get("http://www.washingtonpost.com/")
+        axios.get("https://www.washingtonpost.com/")
             .then(function (response) {
                 var $ = cheerio.load(response.data);
 
