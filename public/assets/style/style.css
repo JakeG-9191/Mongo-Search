@@ -1,9 +1,14 @@
+/* font-family: 'Staatliches', cursive;
+font-family: 'Source Sans Pro', sans-serif;
+font-family: 'EB Garamond', serif; */
+
 body {
   background-image: url("https://iranians.global/wp-content/uploads/2018/07/Research-shows-four-in-five-experts-cited-in-online-news-are-men.0&q=45&auto=format&w=1356&h=668&fit=crop");
   background-size: 120%;
   background-attachment: fixed;
   color: whitesmoke;
   opacity: .95;
+  font-family: 'EB Garamond', serif;
 }
 
 #wrapper {
@@ -140,4 +145,27 @@ p {
 
 #savecomment{
   width: 100%;
+}
+
+.directions {
+  text-align: left;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+}
+
+#scraped-info {
+  width: 80%;
+  margin-left: 10%
+}
+
+h1, h3 {
+  font-family: 'Staatliches', cursive;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h3 {
+  font-size: 2rem;
 }
