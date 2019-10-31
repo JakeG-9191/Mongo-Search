@@ -34,8 +34,8 @@ module.exports = function (app) {
                             console.log(err)
                         })
                 });
+                res.send(`Please Click Below To Return To Home<a href="/"><button type="button" class="btn btn-dark btn-lg">Back To All Articles</button></a>`)
             })
-        location.reload()
     });
 
     app.get("/articles", function (req, res) {
