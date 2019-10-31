@@ -3,16 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Scraping With Mongoose</title>
+  <title>Scraping With Mongoose - Washington Post</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./assets/style/style.css">
 </head>
 
 <body>
   <div id="wrapper">
-    <div>
+    <div class="jumbotron">
       <h1>Washington Post Scraper</h1>
-      <button><a href="/scrape">Scrape New Articles Now</a></button>
-      <button><a href="/mysaved">See Your Saved Articles</a></button>
+      <button type="button" class="btn btn-dark"><a href="/scrape">Scrape New Articles Now</a></button>
+      <button type="button" class="btn btn-dark"><a href="/mysaved">See Your Saved Articles</a></button>
     </div>
 
     <div id="articles"></div>

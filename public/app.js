@@ -21,14 +21,7 @@ $(document).on("click", ".scraped-art", function () {
         .then(function (data) {
             console.log(data);
             $("#user-comment").append("<h2>" + data.title + "</h2>");
-            $("#user-comment").append("<input id='titleinput' name='title'>");
-            $("#user-comment").append("<textarea id='bodyinput' name='body'></textarea>");
-            $("#user-comment").append("<button data-id='" + data._id + "'id='savecomment'>Save Your Comment</button>");
-            $("#user-comment").append("<button data-id='" + data._id + "'id='save-art'>Save This Article</button>");
-            $("#user-comment").append("<h2> Your Saved Comment <h2>")
-            $("#user-comment").append("<input id='title2'></input>");
-            $("#user-comment").append("<input id='comment2'></input>");
-            $("#user-comment").append("<button data-id='" + data._id + "'id='deletecomment'>Delete Your Comment</button>");
+            $("#user-comment").append("<button type='button' class='btn btn-dark' data-id='" + data._id + "'id='save-art'>Save This Article</button>");
 
             if (data.comment) {
                 $("#title2").val(data.comment.title);
@@ -46,7 +39,19 @@ $(document).on("click", ".scraped-art", function () {
         })
         .then(function (data) {
             console.log(data);
-            $("#user-saved").append("<button data-id='" + data._id + "'id='delete-art'>Delete This Article From Saved</button>");
+            $("#user-saved").append("<button type='button' class='btn btn-dark' data-id='" + data._id + "'id='delete-art'>Delete This Article From Saved</button>");
+            $("#user-saved").append("<h2>" + data.title + "</h2>");
+            $("#user-saved").append("<input id='titleinput' name='title'>");
+            $("#user-saved").append("<textarea id='bodyinput' name='body'></textarea>");
+            $("#user-saved").append("<button type='button' class='btn btn-dark' data-id='" + data._id + "'id='savecomment'>Save Your Comment</button>");
+            $("#user-saved").append("<h2> Your Saved Comment <h2>")
+            $("#user-saved").append("<input id='title2'></input>");
+            $("#user-saved").append("<input id='comment2'></input>");
+            $("#user-saved").append("<button type='button' class='btn btn-dark' data-id='" + data._id + "'id='deletecomment'>Delete Your Comment</button>");
+            if (data.comment) {
+                $("#title2").val(data.comment.title);
+                $("#comment2").val(data.comment.body)
+            }
         });
 });
 
@@ -68,6 +73,7 @@ function saveComment() {
 
         $("#titleinput").val("");
         $("#bodyinput").val("");
+        location.reload();
     });
 }
 
@@ -99,6 +105,7 @@ $(document).on("click", "#save-art", function(){
     }).then(function(data) {
         console.log(data);
     });
+    location.reload();
 });
 
 $(document).on("click", "#delete-art", function(){
@@ -109,6 +116,7 @@ $(document).on("click", "#delete-art", function(){
     }).then(function(data) {
         console.log(data);
     });
+    location.reload();
 });
 
 saveComment();

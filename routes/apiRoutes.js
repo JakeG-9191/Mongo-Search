@@ -40,7 +40,9 @@ module.exports = function (app) {
     });
     
     app.get("/articles", function (req, res) {
-        db.Article.find({})
+        db.Article.find(
+            { saved: false}
+            )
             .then(function (dbArticle) {
                 res.json(dbArticle);
             })
