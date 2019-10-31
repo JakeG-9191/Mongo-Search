@@ -4,6 +4,12 @@ $.getJSON("/articles", function (data) {
     }
 });
 
+$.getJSON("/saved", function (data) {
+    for (var i = 0; i < data.length; i++) {
+        $("#articles-saved").append("<p class='scraped-art' data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    }
+});
+
 $(document).on("click", ".scraped-art", function () {
     $("#user-comment").empty();
     var thisId = $(this).attr("data-id");

@@ -36,7 +36,6 @@ module.exports = function (app) {
                         })
                 });
                 res.send("Scrape Has Completed!");
-                // res.render("index", "Scrape Has Completed!")
             })
     });
     
@@ -50,6 +49,17 @@ module.exports = function (app) {
             })
     });
     
+    app.get("/saved", function(req, res) {
+        db.Article.find( 
+            { saved: true }
+        ).then(function(dbArticle) {
+            res.json(dbArticle)
+        })
+        .catch(function (err) {
+            res.json(err)
+        })
+    });
+
     app.get("/articles/:id", function (req, res) {
         db.Article.findOne({ _id: req.params.id })
             .populate("comment")
@@ -84,11 +94,4 @@ module.exports = function (app) {
         })
     });
     
-    app.get("/saved", function(req, res) {
-        db.Article.find( 
-            { saved: true }
-        ).then(function(data) {
-            res.render("index", data)
-        });
-    });
 }
