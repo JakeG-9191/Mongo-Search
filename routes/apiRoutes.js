@@ -12,6 +12,7 @@ module.exports = function (app) {
     })
 
     app.get("/scrape", function (req, res) {
+        db.Article.drop({});
         axios.get("http://www.washingtonpost.com/")
             .then(function (response) {
                 var $ = cheerio.load(response.data);
@@ -34,7 +35,8 @@ module.exports = function (app) {
                             console.log(err)
                         })
                 });
-                res.send(`Please Click Below To Return To Home<a href="/"><button type="button" class="btn btn-dark btn-lg">Back To All Articles</button></a>`)
+                // res.send(`Please Click Below To Return To Home<a href="/"><button type="button" class="btn btn-dark btn-lg">Back To All Articles</button></a>`)
+                res.render("scraped", response)
             })
     });
 
