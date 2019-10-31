@@ -2,7 +2,7 @@
 An application that uses Mongo to provide the latest headlines to users from the Washington Post.
 
 # Application Details
-The Washington Post Mongo Scraper allows the user direct access to the most recent headlines from the Washington Post. Visit the deployed version of the application at 
+The Washington Post Mongo Scraper allows the user direct access to the most recent headlines from the Washington Post. Visit the deployed version of the application at https://chilling-crypt-08855.herokuapp.com/ 
 
 Users will first visit the page, where they will be greeted with directions on how to initate the scraping. Once articles have been scraped, users have the ability to look at a variety of headlines from the Washington Post.
 
