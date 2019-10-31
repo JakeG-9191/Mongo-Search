@@ -35,6 +35,7 @@ module.exports = function (app) {
                         })
                 });
             })
+        location.reload()
     });
 
     app.get("/articles", function (req, res) {

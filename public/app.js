@@ -22,6 +22,7 @@ $(document).on("click", ".scraped-art", function () {
             console.log(data);
             $("#user-comment").append("<h2>" + data.title + "</h2>");
             $("#user-comment").append("<button type='button' class='btn btn-dark btn-lg' data-id='" + data._id + "'id='save-art'>Save This Article</button>");
+            $("#user-comment").append("<a target='_blank' href='" + data.link + "'><button type='button' class='btn btn-dark btn-lg' id='visit-art'>Visit This Article</button></a>");
 
             if (data.comment) {
                 $("#title2").val(data.comment.title);
@@ -39,9 +40,10 @@ $(document).on("click", ".scraped-art", function () {
         })
         .then(function (data) {
             console.log(data);
+            $("#user-saved").append("<a target='_blank' href='" + data.link + "'><button type='button' class='btn btn-dark btn-lg' id='visit-art'>Visit This Article</button></a>");
             $("#user-saved").append("<button type='button' class='btn btn-dark btn-lg' data-id='" + data._id + "'id='delete-art'>Delete This Article From Saved</button>");
             $("#user-saved").append("<h2>" + data.title + "</h2>");
-            $("#user-saved").append("<input id='titleinput' name='title'>");
+            $("#user-saved").append("<input id='titleinput' name='title'>Add Your Title Above and Comment Below</input>");
             $("#user-saved").append("<textarea id='bodyinput' name='body'></textarea>");
             $("#user-saved").append("<button type='button' class='btn btn-dark btn-lg' data-id='" + data._id + "'id='savecomment'>Save Your Comment</button>");
             $("#user-saved").append("<h2> Your Saved Comment <h2>")
@@ -118,6 +120,11 @@ $(document).on("click", "#delete-art", function(){
     });
     location.reload();
 });
+
+// $(document).on("click", "#visit-art", function(){
+//     var thisLink = $(this).attr("link");
+//     href = thisLink
+// });
 
 saveComment();
 deleteComment();

@@ -59,6 +59,7 @@ input {
   font-size: 24px;
   border-radius: 8px;
   margin-top: 1rem;
+  text-align: center;
 }
 
 textarea {
@@ -66,6 +67,7 @@ textarea {
   font-size: 18px;
   border-radius: 18px;
   margin-top: 1rem;
+  text-align: center;
 }
 
 a {
@@ -108,4 +110,24 @@ p {
 ::-webkit-scrollbar-thumb {
   background: maroon;
   border-radius: 10px;
+}
+
+#save-art{
+  width: 100%;
+}
+
+#visit-art{
+  width: 100%;
+}
+
+#delete-art{
+  width: 100%;
+}
+
+#deletecomment{
+  width: 100%;
+}
+
+#savecomment{
+  width: 100%;
 }
