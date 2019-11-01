@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var cheerio = require("cheerio");
 var db = require("../models");
 var axios = require("axios");
+var path = require("path");
 
 module.exports = function (app) {
     app.get("/api/all", function (req, res) {
